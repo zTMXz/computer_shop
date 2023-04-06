@@ -22,9 +22,9 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="max-height: 60px; margin-bottom: 20px">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">Компутер.by</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Телефончик.by</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,9 +34,13 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans 'Home' %}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'shop:product_list' %}">{% trans 'Catalog' %}</a>
+                </li>
 
                 <li class="nav-item dropdown" aria-labelledby="navbarDropdown"
-                    style="position:absolute; cursor: pointer; right: 150px;">
+                    style="position:absolute; cursor: pointer; right: 200px;">
                     <p class="nav-link dropdown-toggle" id="navbarDropdown"
                        style="margin-bottom: 0">{% trans "Language" %}</p>
                     {% get_current_language as LANGUAGE_CODE %}
@@ -51,9 +55,42 @@
                         {% endfor %}
                     </div>
                 </li>
+
+                <li class="nav-item dropdown" style="position:absolute; cursor: pointer; right: 75px">
+                    <div class="nav-link dropdown-toggle-split" id="navbarDropdown" style="margin-bottom: 0;">
+                        <a href="{% url "cart:cart_detail" %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#1d9444"
+                                 class="bi bi-basket-fill" viewBox="0 0 16 16">
+                                <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown"
+                         style="min-width: 8rem; right: 0; left: auto; text-align: center;">
+                        {% with total_items=cart|length %}
+                            {% if cart|length > 0 %}
+                                Your cart: <br>
+                                <a href="{% url "cart:cart_detail" %}">
+                                    {{ total_items }} item{{ total_items|pluralize }},
+                                    ${{ cart.get_total_price }}
+                                </a>
+                            {% else %}
+                                Your cart is empty.
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item dropdown" style="position: absolute; cursor: pointer; right: 20px;">
-                        <p class="nav-link dropdown-toggle" id="navbarDropdown" style="margin-bottom: 0">{{ user }}</p>
+                    <li class="nav-item dropdown" style="position: absolute; cursor: pointer; right: 25px;">
+                        <div class="nav-link dropdown-toggle-split" id="navbarDropdown" style="margin-bottom: 0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#525252"
+                                 class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd"
+                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                        </div>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                              style="min-width: 5rem; right: 0; left: auto">

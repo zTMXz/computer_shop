@@ -3,7 +3,26 @@ from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from django.views import View
 
+from computer_store.settings import DEFAULT_FROM_EMAIL
 from users.forms import UserCreationForm, UserUpdateForm
+
+def send_mail_to_Egor(request):
+    send_mail(subject='Successful Registration Message',
+              message=f"""
+                           You have successfully registered on Компуктер.by
+                           Your login details:
+                           ===============================
+                               username: {request.user.username}
+                               password: {request.user.password}
+                           ===============================
+                           
+                           Проверка работоспособности почты, если ты получил
+                           это сообщение, знай, ты дурачок <3
+                         """,
+              recipient_list=[request.user.email],
+              from_email=DEFAULT_FROM_EMAIL
+              )
+    return redirect('home')
 
 
 class Register(View):
@@ -28,19 +47,20 @@ class Register(View):
 
             login(request, user)
 
-            # #РАБОТАЕТ, ПОТОМ ПЕРЕПИСАТЬ
-            # send_mail(subject='Successful Registration Message',
-            #           message= f"""
-            #             You have successfully registered on EV_Chargers
-            #             Your login details:
-            #             ===============================
-            #                 username: {username}
-            #                 password: {password}
-            #             ===============================
-            #           """,
-            #           recipient_list=[email],
-            #           from_email=DEFAULT_FROM_EMAIL
-            #           )
+
+            #РАБОТАЕТ, ПОТОМ ПЕРЕПИСАТЬ
+            send_mail(subject='Successful Registration Message',
+message= f"""
+You have successfully registered on Компуктер.by
+Your login details:
+===============================
+username: {username}
+password: {password}
+===============================
+""",
+                      recipient_list=[email],
+                      from_email=DEFAULT_FROM_EMAIL
+                      )
 
             return redirect('home')
 

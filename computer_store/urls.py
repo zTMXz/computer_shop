@@ -28,6 +28,9 @@ urlpatterns = [
 urlpatterns += i18n_patterns (
     path('', TemplateView.as_view(template_name="home.html"), name="home"),
     path('users/', include('users.urls')),
+    path('catalog/', include(('shop.urls', 'shop'), namespace='shop')),
+    path('cart/', include(('cart.urls', 'cart'), namespace='cart')),
+
 )
 
 
