@@ -1,28 +1,35 @@
-{% extends "shop/base.html" %}
-{% load static %}
+{% extends "base.html" %}
+{% load static i18n %}
+
 {% block title %}
     Your shopping cart
 {% endblock %}
+
+{% block style_css %}
+    <link rel="stylesheet" href="{% static 'cart/css/cart_detail.css' %}">
+{% endblock %}
+
 {% block content %}
-    <h1>Your shopping cart</h1>
-    <table class="cart">
+    <h1 style="display: flex; justify-content: center; margin-bottom: 20px">Your shopping cart</h1>
+    <table class="table table-striped align-middle cart" id="table">
         <thead>
         <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Remove</th>
-            <th>Unit price</th>
-            <th>Price</th>
+            <th class="col-md-2">Image</th>
+            <th class="col-md-2">Product</th>
+            <th class="col-md-2">Quantity</th>
+            <th class="col-md-2">Unit price</th>
+            <th class="col-md-2">Price</th>
+            <th class="col-md-2">Remove</th>
         </tr>
         </thead>
+
         <tbody>
         {% for item in cart %}
             {% with product=item.product %}
                 <tr>
-                    <td>
+                    <td class="col-md-2">
                         <a href="{{ product.get_absolute_url }}">
-                            <img src="
+                            <img class="table-image" src="
                                 {% if product.image %}
                                     {{ product.image.url }}
                                 {% else %}
@@ -30,23 +37,78 @@
                                 {% endif %}">
                         </a>
                     </td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td><a href="{% url "cart:cart_remove" product.id%}">Remove</a></td>
-                    <td class="num">${{ item.price }}</td>
-                    <td class="num">${{ item.total_price }}</td>
+                    <td class="col-md-2">
+                        {{ product.name }}
+                    </td>
+                    <td class="col-md-2">
+                        {{ item.quantity }}
+                    </td>
+                    <td class="col-md-2">
+                        {{ item.price }} BYN
+                    </td>
+                    <td class="col-md-2">
+                        {{ item.total_price }} BYN
+                    </td>
+                    <td class="col-md-2">
+                        <a href="{% url "cart:cart_remove" product.id %}">Remove</a>
+                    </td>
                 </tr>
             {% endwith %}
+
+        {% empty %}
+            <tr>
+                <td class="col-md-12 text-center" colspan="6">
+                    NO items to display
+                </td>
+            </tr>
         {% endfor %}
+
+        {% if cart.coupon %}
+            <tr class="subtotal">
+                <td colspan="4"></td>
+                <td style="font-weight: 540; font-size: 16px">Subtotal</td>
+                <td class="num">{{ cart.get_total_price }} BYN</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>
+                    coupon "<span style="font-weight: 520; font-size: 16px">{{ cart.coupon.code }}</span>" <br>
+                    ({{ cart.coupon.discount }}% off)
+                </td>
+                <td class="num neg">
+                    - {{ cart.get_discount|floatformat:"2" }} BYN
+                </td>
+            </tr>
+        {% endif %}
+
         <tr class="total">
-            <td>Total</td>
             <td colspan="4"></td>
-            <td class="num">${{ cart.get_total_price }}</td>
+            <td style="font-weight: 600; font-size: 18px">Total</td>
+            <td class="num">{{ cart.get_total_price_after_discount|floatformat:"2" }} BYN</td>
         </tr>
         </tbody>
     </table>
-    <p class="text-right">
-        <a href="{% url "shop:product_list" %}" class="button light">Continue shopping</a>
-        <a href="#" class="button">Checkout</a>
+
+    <div class="coupon">
+        <form action="{% url "coupons:apply" %}" method="post">{% csrf_token %}
+            <div class="input-group mb-3">
+                <label for="id_code" class="input-group-text" style="font-size: 20px; line-height: 18px">Code: </label>
+                <input type="text" class="form-control" name="code" required="" id="id_code"
+                       aria-describedby="button-addon2">
+                <button type="submit" class="btn btn-outline-secondary btn-coupon" id="button-addon2">✓</button>
+            </div>
+        </form>
+    </div>
+
+
+    <p class="text-center" style="margin-top: 20px">
+        <a href="{% url "shop:product_list" %}" class="btn btn2" style="margin-right: 10px">
+            {% trans "Continue shopping" %}
+        </a>
+        {% if cart.get_total_price != 0 %}
+            <a href="{% url "orders:order_create" %}" class="btn btn2" style="padding-top: 15px">
+                {% trans "Checkout" %}
+            </a>
+        {% endif %}
     </p>
 {% endblock %}
