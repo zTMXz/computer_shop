@@ -23,6 +23,7 @@ aside {
     background-color: rgb(29, 148, 68, 0.35);
     border-radius: 15px;
     height: calc(100% - 100px);
+    min-height: 300px;
     width: 290px;
     color: #525252
 }

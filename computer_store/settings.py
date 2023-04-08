@@ -14,7 +14,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 # django-admin compilemessages
 
 
-
 import os
 import environ
 
@@ -64,7 +63,10 @@ INSTALLED_APPS = [
     "users",
     "shop",
     "cart",
+    "orders",
+    "coupons",
     'widget_tweaks',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

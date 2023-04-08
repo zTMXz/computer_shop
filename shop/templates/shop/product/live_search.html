@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Live Search Example</h1>
+    <form id="search-form" method="GET">
+      <input type="text" name="q" id="search-input" placeholder="Search...">
+    </form>
+    <div id="search-results">
+      {% if products %}
+        <ul>
+          {% for product in products %}
+            <li><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></li>
+          {% endfor %}
+        </ul>
+{#        {% if page_obj.has_other_pages %}#}
+{#          <nav class="pagination">#}
+{#            {% if page_obj.has_previous %}#}
+{#              <a href="?page={{ page_obj.previous_page_number }}&q={{ q }}">previous</a>#}
+{#            {% endif %}#}
+{#            <span class="current-page">{{ page_obj.number }}</span>#}
+{#            {% if page_obj.has_next %}#}
+{#              <a href="?page={{ page_obj.next_page_number }}&q={{ q }}">next</a>#}
+{#            {% endif %}#}
+{#          </nav>#}
+{#        {% endif %}#}
+      {% else %}
+        <p>No results found.</p>
+      {% endif %}
+    </div>
+  </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{#  <script>#}
+{#    $(document).ready(function() {#}
+{#      $('#search-input').on('input', function() {#}
+{#        var query = $(this).val();#}
+{#        $.ajax({#}
+{#          url: '{{ search_url }}',#}
+{#          data: {q: query},#}
+{#          dataType: 'json',#}
+{#          success: function(data) {#}
+{#            var results = '';#}
+{#            for (var i = 0; i < data.length; i++) {#}
+{#              results += '<li><a href="{% url 'product_detail' %}' + data[i].id + '">' + data[i].name + '</a></li>';#}
+{#            }#}
+{#            $('#search-results ul').html(results);#}
+{#          }#}
+{#        });#}
+{#      });#}
+{#    });#}
+{#  </script>#}
+{% endblock %}
