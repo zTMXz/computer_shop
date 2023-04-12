@@ -22,6 +22,21 @@ class Category(models.Model):
                        args=[self.slug])
 
 
+class PhoneDetails(models.Model):
+    model = models.CharField(max_length=100, default='')
+    display = models.TextField()
+    processor = models.TextField()
+    size_and_weight = models.TextField()
+    camera = models.TextField()
+    video = models.TextField()
+    front_cam = models.TextField()
+    mobile_cnct = models.TextField()
+    os = models.CharField(max_length=25, default='')
+
+    def __str__(self):
+        return self.model
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
@@ -34,6 +49,12 @@ class Product(models.Model):
     created = models.DateTimeField(default=datetime.datetime.now())
     updated = models.DateTimeField(default=datetime.datetime.now())
 
+    memory = models.CharField(max_length=10, default='0GB')
+    ram = models.CharField(max_length=10, default='0GB')
+    ph_color_hex = models.CharField(max_length=50, default='')
+    ph_color_name = models.CharField(max_length=50, default='')
+    details = models.ForeignKey(PhoneDetails, on_delete=models.CASCADE)
+
     class Meta:
         ordering = ('name',)
         index_together = (('id', 'slug'),)
@@ -44,6 +65,22 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('shop:product_detail',
                        args=[self.id, self.slug])
+
+
+class PhoneConfiguration(models.Model):
+    phone_id = models.ForeignKey(Product, related_name='configuration', on_delete=models.CASCADE)
+    phone_configurations = models.ManyToManyField(Product, related_name='Configurations')
+
+
+class PhoneColors(models.Model):
+    phone_id = models.ForeignKey(Product, related_name='color', on_delete=models.CASCADE)
+    phone_colors = models.ManyToManyField(Product, related_name='Colors')
+
+
+
+
+
+
 
 
 

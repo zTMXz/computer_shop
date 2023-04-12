@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, PhoneConfiguration, PhoneColors, PhoneDetails
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -8,9 +8,28 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 
+class PhoneConfigInline(admin.TabularInline):
+    model = PhoneConfiguration
+    list_display = ['id', 'name', 'slug', 'price', 'stock', 'available', 'created', 'updated']
+    raw_id_fields = ['phone_id']
+
+
+class PhoneColorInline(admin.TabularInline):
+    model = PhoneColors
+    list_display = ['id', 'name', 'slug', 'price', 'stock', 'available', 'created', 'updated']
+    raw_id_fields = ['phone_id']
+
+
+
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'price', 'stock', 'available', 'created', 'updated']
-    list_filter = ['available', 'created', 'updated']
-    list_editable = ['price', 'stock', 'available']
+    list_display = ['id', 'name', 'slug', 'price', 'stock', 'available', 'details', 'ph_color_hex', 'ph_color_name']
+    list_filter = ['name', 'available']
+    list_editable = ['price', 'stock', 'available', 'details', 'ph_color_hex', 'ph_color_name']
+    inlines = [PhoneConfigInline, PhoneColorInline]
     prepopulated_fields = {'slug': ('name',)}
 admin.site.register(Product, ProductAdmin)
+
+admin.site.register(PhoneConfiguration)
+admin.site.register(PhoneColors)
+admin.site.register(PhoneDetails)
+
