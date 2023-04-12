@@ -13,8 +13,6 @@ def order_create(request):
         form = OrderCreateForm(request.POST)
 
         if form.is_valid():
-
-
             order_request = form.save(commit=False)  # Создаем объект, но не сохраняем его в БД
             order_request.user = request.user  # Указываем пользователя в поле person
 
