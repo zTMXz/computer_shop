@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans 'Products' %}{% endblock %}
+
+
+{% block style_css %}
+    <link rel="stylesheet" href="{% static 'shop/css/catalog_list.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% endblock %}
+
+
+{% block content %}
+    <div class="catalogContainer">
+        <aside>
+            <h3 style="display: flex; justify-content: center; margin-top: 20px"> {% trans 'Filter' %} </h3>
+            <ul style="list-style-type: none">
+                <li>
+                    <hr class="dropdown-divider" style="margin-right: 2rem; margin-top: 20px">
+                </li>
+                <li class="filter">
+                    <a class="filter-link" href="{% url "shop:product_list" %}">{% trans 'All' %}</a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider" style="margin-right: 2rem">
+                </li>
+                {% for c in categories %}
+                    <li class="filter">
+                        <a class="filter-link" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+        <div class="catalog">
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-thumb">
+                        <a href="{{ product.get_absolute_url }}" style="text-decoration: none;">
+                            <img src="
+
+                                    {% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}"
+                                 alt="{{ product.name }}">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <a href="{{ product.get_absolute_url }}" style="text-decoration: none;">
+                            <h5 style="color: #1b1b1b">{{ product.name }}</h5>
+                        </a>
+
+
+                        <div class="product-bottom-details d-flex justify-content-between align-items-center">
+                            {#                            <a href="{{ car.get_absolute_url }}" class="btn btn1 btn-sm btn-outline-secondary">{% trans "View" %}</a>#}
+                            <div class="product-price">
+                                {{ product.price }} BYN
+                            </div>
+                            {% if car.is_broken == True or car.is_rented == True %}
+                                <span class="unavailable">{% trans 'temporarily unavailable..' %}</span>
+                            {% else %}
+                                <form action="{% url "cart:cart_add" product.id %}" method="post">{% csrf_token %}
+                                    <div hidden="hidden">
+                                        {{ cart_product_form }}
+                                    </div>
+                                    <input type="submit"
+                                           class="btn btn2 {% if not user.is_authenticated %} disabled {% endif %}"
+                                           value='{% trans "Add to Cart" %}'>
+                                </form>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            $('#search-box').autocomplete({
+                source: '/products/',
+                minLength: 1,
+                select: function (event, ui) {
+                    window.location.href = '/products/' + ui.item.id;
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{#{% block content %}#}
+{#    <div id="sidebar">#}
+{#        <h3>Categories</h3>#}
+{#        <ul>#}
+{#            <li {% if not category %}class="selected"{% endif %}>#}
+{#                <a href="{% url "shop:product_list" %}">All</a>#}
+{#            </li>#}
+{#            {% for c in categories %}#}
+{#                <li {% if category.slug == c.slug %}class="selected"{% endif %}>#}
+{#                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{#    <div id="main" class="product-list">#}
+{#        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>#}
+{#        {% for product in products %}#}
+{#            <div class="item">#}
+{#                <a href="{{ product.get_absolute_url }}">#}
+{#                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">#}
+{#                </a>#}
+{#                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>#}
+{#                ${{ product.price }}#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endblock %}#}
+

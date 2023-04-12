@@ -1,0 +1,61 @@
+.cart {
+    margin: auto;
+    width: 80%;
+}
+
+.coupon {
+    display: flex;
+    justify-content: right;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.table-image {
+    height: 75px;
+}
+
+.btn.btn-coupon {
+    color: #fff;
+    background-color: #1d9444;
+    font-size: 16px;
+    line-height: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    width: 50px;
+    padding: 5px;
+    border: 2px solid #1d9444;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+}
+
+.btn.btn-coupon:hover,
+.btn.btn-coupon:focus {
+    color: #1d9444;
+    background-color: #fff;
+    box-shadow: 0 0 5px #1d9444, 0 0 15px #1d9444 inset;
+}
+
+.btn.btn2 {
+    color: #fff;
+    background-color: #1d9444;
+    font-size: 16px;
+    line-height: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    width: 130px;
+    height: 50px;
+    padding: 8px;
+    border: 2px solid #1d9444;
+    border-radius: 15px;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+}
+
+.btn.btn2:hover,
+.btn.btn2:focus {
+    color: #1d9444;
+    background-color: #fff;
+    box-shadow: 0 0 5px #1d9444, 0 0 15px #1d9444 inset;
+}
