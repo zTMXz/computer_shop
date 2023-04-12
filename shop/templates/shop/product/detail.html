@@ -1,18 +1,173 @@
-{% extends "shop/base.html" %}
-{% load static %}
+{% extends "base.html" %}
+{% load static i18n %}
+
 {% block title %}
     {% if category %}{{ category.title }}{% else %}Products{% endif %}
 {% endblock %}
+
+{% block style_css %}
+    <link rel="stylesheet" href="{% static 'shop/css/product_detail.css' %}">
+{% endblock %}
+
 {% block content %}
-    <div class="product-detail">
-        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
-        <h1>{{ product.name }}</h1>
-        <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
-        <p class="price">${{ product.price }}</p>
-        <form action="{% url "cart:cart_add" product.id %}" method="post">
-            {{ cart_product_form }}
-            {% csrf_token %}
-            <input type="submit" value="Add to cart">
-        </form>
+    {#    <div class="product-detail">#}
+    {#        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">#}
+    {#        <h1>{{ product.name }}</h1>#}
+    {#        <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>#}
+    {#        <p class="price">${{ product.price }}</p>#}
+    {#        <form action="{% url "cart:cart_add" product.id %}" method="post">#}
+    {#            {{ cart_product_form }}#}
+    {#            {% csrf_token %}#}
+    {#            <input type="submit" value="Add to cart">#}
+    {#        </form>#}
+    {#    </div>#}
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="wrapper-left">
+                <div class="wrapper-image-main">
+                    <img alt="{{ product.name }}"
+                         src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}"
+                    >
+                </div>
+            </div>
+
+            <div class="wrapper-right">
+                <h1 style="text-align: center;">{{ product.name }}</h1>
+                <div class="product-details">
+                    <p class="product-brand">{% trans 'Brand' %}: <span>{{ product.category }}</span></p>
+
+                    <p class="product-title-text">{% trans 'Memory Size' %}</p>
+                    <div class="product-block">
+                        {% for config in phone_configs %}
+                            <div class="product-memory-link">
+                                <a href="{{ config.get_absolute_url }}"
+                                   style="text-decoration: none; color: #fff;">
+                                    {{ config.memory }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <p class="product-title-text">{% trans 'Colors' %}</p>
+                    <div class="product-block">
+                        {% for phone_color in phone_colors %}
+                            <form action="{{ phone_color.get_absolute_url }}">
+                                <button class="btn btn-color" title="{{ phone_color.ph_color_name }}"
+                                        style="background-color: {{ phone_color.ph_color_hex }} "></button>
+                            </form>
+                        {% endfor %}
+                    </div>
+
+                    <p class="product-price"> {{ product.price }} BYN </p>
+                    <form class="input-group" style="width: 300px" action="{% url "cart:cart_add" product.id %}"
+                          method="post">
+                        {#                        <label class="product-title-text" for="id_quantity">{% trans 'Quantity' %}:</label>#}
+                        <select class="form-select" name="quantity" id="id_quantity">
+                            {% for i in range %}
+                                <option value={{ i }}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+
+                        {#                            {{ cart_product_form }}#}
+                        {% csrf_token %}
+                        <button class="btn btn-buy {% if not user.is_authenticated %} disabled {% endif %}"
+                                type="submit">{% trans 'Add to cart' %}</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="description">
+            <h1 style="text-align: center">{% trans 'Details' %}</h1>
+            <table>
+                <tbody>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Model' %}</td>
+                    <td style="width: 235.477%;">{{ product.details.model }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Color' %}</td>
+                    <td style="width: 235.477%;">{{ product.ph_color_name }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Memory Size' %}</td>
+                    <td style="width: 235.477%;">{{ product.memory }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Display' %}</td>
+                    <td style="width: 235.477%;">
+                        <ul>
+                            {% for item in product.details.display %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Processor' %}</td>
+                    <td style="width: 235.477%;">
+                        <ul>
+                            {% for item in product.details.processor %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Size and Weight' %}</td>
+                    <td style="width: 235.477%;">
+                        <ul>
+                            {% for item in product.details.size_and_weight %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Camera' %}</td>
+                    <td style="width: 235.477%;">
+                        <ul>
+                            {% for item in product.details.camera %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Video Recording' %}</td>
+                    <td style="width: 235.477%;">
+                        <ul>
+                            {% for item in product.details.video %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Front Camera' %}</td>
+                    <td style="width: 235.477%;">
+                        <ul>
+                            {% for item in product.details.front_cam %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Cellular and Wireless' %}</td>
+                    <td style="width: 235.477%;">
+                        <ul>
+                            {% for item in product.details.mobile_cnct %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 {% endblock %}

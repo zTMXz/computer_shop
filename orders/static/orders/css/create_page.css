@@ -1,0 +1,67 @@
+.table-image {
+    height: 45px;
+}
+
+div.order-info {
+    margin: 20px auto;
+    width: 70%;
+
+    text-align: center;
+}
+
+.wrapper {
+    width: 70%;
+    height: 280px;
+    padding: 40px;
+    margin: 20px auto 10px auto;
+
+    background-color: #eeeeee;
+    border-radius: 20px;
+    /*flex-wrap: wrap;*/
+}
+
+.block-to-center {
+    width: 50%;
+    margin: auto;
+}
+
+
+.wrapper-left {
+    width: 50%;
+    margin: auto;
+
+    float: left;
+}
+
+.wrapper-right {
+    width: 50%;
+    margin: auto;
+
+    float: right;
+}
+
+input.form-control {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.btn.btn-buy {
+    padding: 4px 8px;
+    width: 240px;
+    height: 50px;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    background-color: #1d9444;
+    color: #fff;
+
+    border-radius: 10px;
+}
+
+.btn.btn-buy:hover,
+.btn.btn-buy:focus {
+    color: #1d9444;
+    background-color: #fff;
+    border: 1px solid #1d9444;
+}
