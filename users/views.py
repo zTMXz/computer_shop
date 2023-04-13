@@ -1,12 +1,11 @@
 from django.contrib.auth import authenticate, login
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views import View
 
 from computer_store.settings import DEFAULT_FROM_EMAIL
-from orders.forms import OrderCreateForm
-from orders.models import Order, OrderItem
+from orders.models import OrderItem
 from users.forms import UserCreationForm, UserUpdateForm
 
 
@@ -36,7 +35,7 @@ class Register(View):
             #РАБОТАЕТ, ПОТОМ ПЕРЕПИСАТЬ
             send_mail(subject='Successful Registration Message',
 message= f"""
-You have successfully registered on Компуктер.by
+You have successfully registered on Телефончик.by
 Your login details:
 ===============================
 username: {username}

@@ -5,6 +5,7 @@ from users.models import User
 from django.urls import reverse
 
 
+
 class Category(models.Model):
     name = models.CharField(max_length=50, db_index=True)
     slug = models.SlugField(max_length=60, db_index=True, unique=True)
@@ -33,6 +34,11 @@ class PhoneDetails(models.Model):
     mobile_cnct = models.TextField()
     os = models.CharField(max_length=25, default='')
 
+    class Meta:
+        ordering = ('model',)
+        verbose_name = 'Детали телефона'
+        verbose_name_plural = 'Детали телефонов'
+
     def __str__(self):
         return self.model
 
@@ -57,6 +63,8 @@ class Product(models.Model):
 
     class Meta:
         ordering = ('name',)
+        verbose_name = 'Телефон'
+        verbose_name_plural = 'Телефоны'
         index_together = (('id', 'slug'),)
 
     def __str__(self):
@@ -71,10 +79,18 @@ class PhoneConfiguration(models.Model):
     phone_id = models.ForeignKey(Product, related_name='configuration', on_delete=models.CASCADE)
     phone_configurations = models.ManyToManyField(Product, related_name='Configurations')
 
+    class Meta:
+        verbose_name = 'Конфигурация'
+        verbose_name_plural = 'Конфигурации телефонов'
+
 
 class PhoneColors(models.Model):
     phone_id = models.ForeignKey(Product, related_name='color', on_delete=models.CASCADE)
     phone_colors = models.ManyToManyField(Product, related_name='Colors')
+
+    class Meta:
+        verbose_name = 'Цвет'
+        verbose_name_plural = 'Цвета телефонов'
 
 
 

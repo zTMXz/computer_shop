@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.core.mail import send_mail
 
+from computer_store.settings import DEFAULT_FROM_EMAIL
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
@@ -28,6 +29,17 @@ def order_create(request):
                                          price=item['price'],
                                          quantity=item['quantity'])
             # очистка корзины
+
+            send_mail(subject='Successful Order Message',
+                      message=f"""
+You have successfully created an order on Телефончик.by
+Total price {cart.get_total_price_after_discount()} BYN
+Our experts will contact you shortly
+Have a nice day!
+            """,
+                      recipient_list=[order_request.user.email],
+                      from_email=DEFAULT_FROM_EMAIL
+                      )
             cart.clear()
             return render(request, 'orders/created.html',
                           {'order': order_request})
