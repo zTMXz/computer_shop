@@ -20,7 +20,6 @@ class PhoneColorInline(admin.TabularInline):
     raw_id_fields = ['phone_id']
 
 
-
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'slug', 'price', 'stock', 'available', 'details', 'ph_color_hex', 'ph_color_name']
     list_filter = ['name', 'available']
