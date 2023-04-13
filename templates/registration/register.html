@@ -2,6 +2,12 @@
 {% load static i18n %}
 {% load widget_tweaks %}
 
+{% block meta %}
+    {% if user.is_authenticated %}
+        <meta http-equiv="refresh" content="0;URL=/">
+    {% endif %}
+{% endblock %}
+
 {% block title %} {% trans 'Sign Up' %} {% endblock %}
 
 {% block style_css %}
@@ -11,50 +17,37 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid" style="margin-top: 80px;">
+    <div class="container">
+        <div class="row">
 
-        <div class="offset-md-4 col-md-4 offset-sm-3 col-sm-6">
-            <div class="form-container">
-                <h3 class="title">{% trans "Sign Up" %}</h3>
-                <ul class="social-links">
-                    <li><a href=""><i class="fab fa-google"></i></a></li>
-                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                </ul>
-
-                <span class="description">{% trans "or use you email and username for sign up" %}:</span>
-
+            <div class="col-md-offset-3 col-md-6">
                 <form class="form-horizontal" action="{% url 'register' %}" method="post">
                     {% csrf_token %}
-
+                    <span class="heading" style="color: #1d9444">{% trans "Sign up" %} | <a style="text-decoration: none; color: #3f3f3f;"
+                                                                     href="{% url 'login' %}">{% trans "Sign in" %} </a></span>
                     <div class="form-group">
                         {% render_field form.email|add_class:"form-control" placeholder="Email" %}
+                        <i class="fa-solid fa-envelope"></i>
                     </div>
                     <div class="form-group">
                         {% render_field form.username|add_class:"form-control" placeholder="Username" %}
+                        <i class="fa fa-user"></i>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password1" id="id_password1" placeholder="{% trans "Password" %}">
+                        <input class="form-control" type="password" name="password1" id="id_password1"
+                               placeholder="{% trans "Password" %}">
+                        <i class="fa fa-lock"></i>
                     </div>
                     <div class="form-group" style="margin-bottom: 35px">
-                         <input class="form-control" type="password" name="password2" id="id_password2" placeholder="{% trans "Confirm Password" %}">
+                        <input class="form-control" type="password" name="password2" id="id_password2"
+                               placeholder="{% trans "Confirm Password" %}">
+                        <i class="fa fa-lock"></i>
                     </div>
 
-{#                  ВРЕМЕННО!!!!!!!!!!!!!!!!!!!!!!!!#}
-                    {% if form.errors %}
-                       <span class="description">{{ form.errors }}</span>
-                    {% endif %}
-
-
-                    <button type="submit" class="btn signup">{% trans "Sign up" %}</button>
-                    <a class="btn signin" href="{% url 'login' %}">{% trans "Sign in" %}</a>
-
+                    <button type="submit" class="btn btn-default">{% trans "Sign up" %}</button>
                 </form>
             </div>
-        </div>
 
-    </div>
-
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 {% endblock %}
-
-

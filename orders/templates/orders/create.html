@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load static i18n %}
 
-{% block title %}Checkout{% endblock %}
+{% block meta %}
+    {% if not user.is_authenticated %}
+        <meta http-equiv="refresh" content="0.1;URL=/">
+    {% endif %}
+{% endblock %}
+
+{% block title %}{% trans 'Checkout' %}{% endblock %}
 
 {% block style_css %}
     <link rel="stylesheet" href="{% static 'orders/css/create_page.css' %}">
@@ -51,13 +57,13 @@
             <tr class="total">
                 {% if cart.coupon %}
                     <td style="font-weight: 600; font-size: 18px">{% trans 'Discount' %}</td>
-                    <td>"{{ cart.coupon.code }}" {{ cart.coupon.discount }}% off</td>
+                    <td>"{{ cart.coupon.code }}" {{ cart.coupon.discount }}% </td>
                     <td colspan="2"></td>
                 {% else %}
                     <td colspan="4"></td>
                 {% endif %}
 
-                <td style="font-weight: 600; font-size: 18px">Total</td>
+                <td style="font-weight: 600; font-size: 18px">{% trans 'Total' %}</td>
                 <td class="num">{{ cart.get_total_price_after_discount|floatformat:"2" }} BYN</td>
             </tr>
             </tbody>

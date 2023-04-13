@@ -10,18 +10,6 @@
 {% endblock %}
 
 {% block content %}
-    {#    <div class="product-detail">#}
-    {#        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">#}
-    {#        <h1>{{ product.name }}</h1>#}
-    {#        <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>#}
-    {#        <p class="price">${{ product.price }}</p>#}
-    {#        <form action="{% url "cart:cart_add" product.id %}" method="post">#}
-    {#            {{ cart_product_form }}#}
-    {#            {% csrf_token %}#}
-    {#            <input type="submit" value="Add to cart">#}
-    {#        </form>#}
-    {#    </div>#}
-
     <div class="container">
         <div class="wrapper">
             <div class="wrapper-left">
@@ -84,19 +72,19 @@
             <table>
                 <tbody>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Model' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Model' %}</td>
                     <td style="width: 235.477%;">{{ product.details.model }}</td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Color' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Color' %}</td>
                     <td style="width: 235.477%;">{{ product.ph_color_name }}</td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Memory Size' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Memory Size' %}</td>
                     <td style="width: 235.477%;">{{ product.memory }}</td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Display' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Display' %}</td>
                     <td style="width: 235.477%;">
                         <ul>
                             {% for item in product.details.display %}
@@ -106,7 +94,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Processor' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Processor' %}</td>
                     <td style="width: 235.477%;">
                         <ul>
                             {% for item in product.details.processor %}
@@ -116,7 +104,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Size and Weight' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Size and Weight' %}</td>
                     <td style="width: 235.477%;">
                         <ul>
                             {% for item in product.details.size_and_weight %}
@@ -126,7 +114,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Camera' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Camera' %}</td>
                     <td style="width: 235.477%;">
                         <ul>
                             {% for item in product.details.camera %}
@@ -136,7 +124,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Video Recording' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Video Recording' %}</td>
                     <td style="width: 235.477%;">
                         <ul>
                             {% for item in product.details.video %}
@@ -146,7 +134,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Front Camera' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Front Camera' %}</td>
                     <td style="width: 235.477%;">
                         <ul>
                             {% for item in product.details.front_cam %}
@@ -156,7 +144,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 17%; font-size: 22px; font-weight: 600">{% trans 'Cellular and Wireless' %}</td>
+                    <td style="width: 23%; font-size: 22px; font-weight: 600">{% trans 'Cellular and Wireless' %}</td>
                     <td style="width: 235.477%;">
                         <ul>
                             {% for item in product.details.mobile_cnct %}

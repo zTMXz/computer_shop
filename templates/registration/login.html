@@ -2,6 +2,12 @@
 {% load static i18n %}
 {% load widget_tweaks %}
 
+{% block meta %}
+    {% if user.is_authenticated %}
+        <meta http-equiv="refresh" content="0;URL=/">
+    {% endif %}
+{% endblock %}
+
 {% block title %} {% trans 'Sign In' %} {% endblock %}
 
 {% block style_css %}
@@ -11,36 +17,33 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container">
+        <div class="row">
 
-        <div class="offset-md-4 col-md-4 offset-sm-3 col-sm-6">
-            <div class="form-container">
-                <h3 class="title">{% trans "Sign In" %}</h3>
-                <ul class="social-links">
-                    <li><a href=""><i class="fab fa-google"></i></a></li>
-                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                </ul>
-
-                <span class="description">{% trans "or use you username for sign in" %}:</span>
-
+            <div class="col-md-offset-3 col-md-6">
                 <form class="form-horizontal" action="{% url 'login' %}" method="post">
                     {% csrf_token %}
+                    <span class="heading" style="color: #1d9444">{% trans "Sign in" %} | <a style="text-decoration: none; color: #3f3f3f;" href="{% url 'register' %}">{% trans "Sign up" %} </a></span>
                     <div class="form-group">
                         {{ form.username|add_class:"form-control"}}
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group help">
+                        {{ form.password|add_class:"form-control" }}
+                        <i class="fa fa-lock"></i>
+                        <a class="desc" style="text-align: left; justify-content: flex-start" href="{% url 'password_reset' %}">{% trans "Forgot password" %}?</a>
                     </div>
                     <div class="form-group">
-                        {{ form.password|add_class:"form-control" }}
+                        <div class="main-checkbox">
+                            <input type="checkbox" value="none" id="checkbox1" name="check"/>
+                            <label for="checkbox1"></label>
+                        </div>
+                        <span class="text">{% trans 'Remember me' %}</span>
+                        <button type="submit" class="btn btn-default">{% trans "Sign in" %}</button>
                     </div>
-                    <span class="description">
-                     <a class="desc" href="{% url 'password_reset' %}">{% trans "Forgot password" %}?</a>
-                    </span>
-
-                    <button type="submit" class="btn signup">{% trans "Sign in" %}</button>
-                    <a class="btn signin" href="{% url 'register' %}">{% trans "Sign up" %} </a>
                 </form>
             </div>
-        </div>
 
-    </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 {% endblock %}
