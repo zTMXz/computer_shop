@@ -54,7 +54,6 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(default=datetime.datetime.now())
     updated = models.DateTimeField(default=datetime.datetime.now())
-
     memory = models.CharField(max_length=10, default='0GB')
     ram = models.CharField(max_length=10, default='0GB')
     ph_color_hex = models.CharField(max_length=50, default='')
@@ -83,6 +82,9 @@ class PhoneConfiguration(models.Model):
         verbose_name = 'Конфигурация'
         verbose_name_plural = 'Конфигурации телефонов'
 
+    def __str__(self):
+        return self.phone_id.name
+
 
 class PhoneColors(models.Model):
     phone_id = models.ForeignKey(Product, related_name='color', on_delete=models.CASCADE)
@@ -92,39 +94,5 @@ class PhoneColors(models.Model):
         verbose_name = 'Цвет'
         verbose_name_plural = 'Цвета телефонов'
 
-
-
-
-
-
-
-
-
-#
-# class Order(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     products = models.ManyToManyField(Product, through='OrderProduct')
-#     full_name = models.CharField(max_length=100)
-#     address = models.CharField(max_length=100)
-#     apartment = models.CharField(max_length=100)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f"{self.user.username}'s Order"
-#
-#
-# class OrderProduct(models.Model):
-#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     quantity = models.IntegerField(default=1)
-#
-#     def __str__(self):
-#         return f"{self.order.user.username}'s {self.product.name}"
-#
-#
-# class Delivery(models.Model):
-#     name = models.CharField(max_length=50)
-#     price = models.DecimalField(max_digits=6, decimal_places=2)
-#
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.phone_id.name
