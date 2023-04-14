@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-13 20:24+0300\n"
+"POT-Creation-Date: 2023-04-15 00:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,15 +95,15 @@ msgid "Information about You"
 msgstr "Информация о вас"
 
 #: .\orders\templates\orders\create.html:82
-#, fuzzy
-#| msgid "First Name"
-msgid "First name"
+#: .\templates\registration\profile.html:31
+#: .\templates\registration\profile.html:35
+msgid "First Name"
 msgstr "Имя"
 
 #: .\orders\templates\orders\create.html:89
-#, fuzzy
-#| msgid "Last Name"
-msgid "Last name"
+#: .\templates\registration\profile.html:42
+#: .\templates\registration\profile.html:46
+msgid "Last Name"
 msgstr "Фамилия"
 
 #: .\orders\templates\orders\create.html:107
@@ -248,7 +248,7 @@ msgstr "Ваша корзина пуста"
 msgid "Settings"
 msgstr "Настройки"
 
-#: .\templates\base.html:105 .\templates\home.html:18
+#: .\templates\base.html:105
 msgid "Sign Out"
 msgstr "Выйти"
 
@@ -256,13 +256,13 @@ msgstr "Выйти"
 msgid "Admin Panel"
 msgstr "Админ Панель"
 
-#: .\templates\home.html:20 .\templates\registration\login.html:11
+#: .\templates\home.html:36
+msgid "Promotions and Offers"
+msgstr "Акции и Предложения"
+
+#: .\templates\registration\login.html:11
 msgid "Sign In"
 msgstr "Войти"
-
-#: .\templates\home.html:21 .\templates\registration\register.html:11
-msgid "Sign Up"
-msgstr "Регистрация"
 
 #: .\templates\registration\login.html:26
 #: .\templates\registration\login.html:42
@@ -322,16 +322,6 @@ msgstr "Подтвердить"
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\templates\registration\profile.html:31
-#: .\templates\registration\profile.html:35
-msgid "First Name"
-msgstr "Имя"
-
-#: .\templates\registration\profile.html:42
-#: .\templates\registration\profile.html:46
-msgid "Last Name"
-msgstr "Фамилия"
-
 #: .\templates\registration\profile.html:68
 msgid "Order History"
 msgstr "История заказов"
@@ -367,6 +357,10 @@ msgstr "след."
 #: .\templates\registration\profile.html:125
 msgid "last"
 msgstr "последняя"
+
+#: .\templates\registration\register.html:11
+msgid "Sign Up"
+msgstr "Регистрация"
 
 #: .\templates\registration\register.html:38
 msgid "Password"
@@ -420,6 +414,16 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#, fuzzy
+#~| msgid "First Name"
+#~ msgid "First name"
+#~ msgstr "Имя"
+
+#, fuzzy
+#~| msgid "Last Name"
+#~ msgid "Last name"
+#~ msgstr "Фамилия"
 
 #~ msgid "or use you username for sign in"
 #~ msgstr "или используйте ваш username чтобы войти"
