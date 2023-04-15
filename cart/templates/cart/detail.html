@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-    Your shopping cart
+    {% trans 'Your shopping cart' %}
 {% endblock %}
 
 {% block style_css %}
@@ -16,15 +16,15 @@
 {% endblock %}
 
 {% block content %}
-    <h1 style="display: flex; justify-content: center; margin-bottom: 20px">Your shopping cart</h1>
+    <h1 style="display: flex; justify-content: center; margin-bottom: 20px">{% trans 'Your shopping cart' %}</h1>
     <table class="table table-striped align-middle cart" id="table">
         <thead>
         <tr>
-            <th class="col-md-2">Image</th>
-            <th class="col-md-2">Product</th>
-            <th class="col-md-2">Quantity</th>
-            <th class="col-md-2">Unit price</th>
-            <th class="col-md-2">Price</th>
+            <th class="col-md-2">{% trans 'Image' %}</th>
+            <th class="col-md-2">{% trans 'Product' %}</th>
+            <th class="col-md-2">{% trans 'Quantity' %}</th>
+            <th class="col-md-2">{% trans 'Unit price' %}</th>
+            <th class="col-md-2">{% trans 'Price' %}</th>
             <th class="col-md-2"></th>
         </tr>
         </thead>
@@ -58,7 +58,7 @@
                         {{ item.total_price }} BYN
                     </td>
                     <td class="col-md-2">
-                        <a href="{% url "cart:cart_remove" product.id %} " style="color: red">Remove</a>
+                        <a href="{% url "cart:cart_remove" product.id %} " style="color: red">{% trans 'Remove' %}</a>
                     </td>
                 </tr>
             {% endwith %}
@@ -66,7 +66,7 @@
         {% empty %}
             <tr>
                 <td class="col-md-12 text-center" colspan="6">
-                    NO items to display
+                    {% trans 'NO items to display' %}
                 </td>
             </tr>
         {% endfor %}
@@ -74,14 +74,14 @@
         {% if cart.coupon %}
             <tr class="subtotal">
                 <td colspan="4"></td>
-                <td style="font-weight: 540; font-size: 16px">Subtotal</td>
+                <td style="font-weight: 540; font-size: 16px">{% trans 'Subtotal' %}</td>
                 <td class="num">{{ cart.get_total_price }} BYN</td>
             </tr>
             <tr>
                 <td colspan="4"></td>
                 <td>
-                    coupon "<span style="font-weight: 520; font-size: 16px">{{ cart.coupon.code }}</span>" <br>
-                    ({{ cart.coupon.discount }}% off)
+                    {% trans 'coupon' %} "<span style="font-weight: 520; font-size: 16px">{{ cart.coupon.code }}</span>" <br>
+                    ({{ cart.coupon.discount }}%)
                 </td>
                 <td class="num neg">
                     - {{ cart.get_discount|floatformat:"2" }} BYN
@@ -91,7 +91,7 @@
 
         <tr class="total">
             <td colspan="4"></td>
-            <td style="font-weight: 600; font-size: 18px">Total</td>
+            <td style="font-weight: 600; font-size: 18px">{% trans 'Total' %}</td>
             <td class="num">{{ cart.get_total_price_after_discount|floatformat:"2" }} BYN</td>
         </tr>
         </tbody>
@@ -100,7 +100,7 @@
     <div class="coupon">
         <form action="{% url "coupons:apply" %}" method="post">{% csrf_token %}
             <div class="input-group mb-3">
-                <label for="id_code" class="input-group-text" style="font-size: 20px; line-height: 18px">Code: </label>
+                <label for="id_code" class="input-group-text" style="font-size: 20px; line-height: 18px">{% trans 'Code' %}: </label>
                 <input type="text" class="form-control" name="code" required="" id="id_code"
                        aria-describedby="button-addon2">
                 <button type="submit" class="btn btn-outline-secondary btn-coupon" id="button-addon2">✓</button>

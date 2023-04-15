@@ -26,7 +26,7 @@ def product_list(request, slug=None):
 def product_detail(request, id, slug):
     product = get_object_or_404(Product,
                                 id=id,
-                                slug=slug)
+                                slug=slug,)
 
     phone_configs = PhoneConfiguration.objects.filter(phone_id=id)[0].phone_configurations.all()
     phone_colors = PhoneColors.objects.filter(phone_id=id)[0].phone_colors.all()

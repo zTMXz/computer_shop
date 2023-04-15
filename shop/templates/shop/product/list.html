@@ -12,7 +12,7 @@
 
 
 {% block content %}
-    <div class="catalogContainer">
+    <div class="catalogContainer" style="margin-bottom: 100px">
         <aside>
             <h3 style="display: flex; justify-content: center; margin-top: 20px"> {% trans 'Filter' %} </h3>
             <ul style="list-style-type: none">
@@ -32,6 +32,7 @@
                 {% endfor %}
             </ul>
         </aside>
+
         <div class="catalog">
             {% for product in products %}
                 <div class="product-card">
@@ -90,32 +91,3 @@
         });
     </script>
 {% endblock %}
-
-{#{% block content %}#}
-{#    <div id="sidebar">#}
-{#        <h3>Categories</h3>#}
-{#        <ul>#}
-{#            <li {% if not category %}class="selected"{% endif %}>#}
-{#                <a href="{% url "shop:product_list" %}">All</a>#}
-{#            </li>#}
-{#            {% for c in categories %}#}
-{#                <li {% if category.slug == c.slug %}class="selected"{% endif %}>#}
-{#                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>#}
-{#                </li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#    </div>#}
-{#    <div id="main" class="product-list">#}
-{#        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>#}
-{#        {% for product in products %}#}
-{#            <div class="item">#}
-{#                <a href="{{ product.get_absolute_url }}">#}
-{#                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">#}
-{#                </a>#}
-{#                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>#}
-{#                ${{ product.price }}#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#    </div>#}
-{#{% endblock %}#}
-

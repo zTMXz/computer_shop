@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category, Product, PhoneConfiguration, PhoneColors, PhoneDetails
+from modeltranslation.admin import TranslationAdmin
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -20,8 +21,8 @@ class PhoneColorInline(admin.TabularInline):
     raw_id_fields = ['phone_id']
 
 
-
-class ProductAdmin(admin.ModelAdmin):
+# @admin.register(Product)
+class ProductAdmin(TranslationAdmin):
     list_display = ['id', 'name', 'slug', 'price', 'stock', 'available', 'details', 'ph_color_hex', 'ph_color_name']
     list_filter = ['name', 'available']
     list_editable = ['price', 'stock', 'available', 'details', 'ph_color_hex', 'ph_color_name']

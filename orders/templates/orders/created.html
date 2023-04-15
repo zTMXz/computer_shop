@@ -1,9 +1,16 @@
 {% extends "base.html" %}
+{% load static i18n %}
 
-{% block title %}Thank you{% endblock %}
+{% block meta %}
+        <meta http-equiv="refresh" content="2;URL=/">
+{% endblock %}
+
+{% block title %}{% trans 'Succesful Order' %}{% endblock %}
 
 {% block content %}
-    <h1>Thank you</h1>
-    <p>Your order has been successfully completed. Your order number is
+    <h1>{% trans 'Thank you' %}</h1>
+    <p>{% trans 'Your order has been successfully completed. Your order number is' %}
         <strong>{{ order.id }}</strong>.</p>
+    <p>{% trans 'Our experts will contact you shortly' %}</p>
+    <p>{% trans 'You will be redirected in few seconds..' %}</p>
 {% endblock %}

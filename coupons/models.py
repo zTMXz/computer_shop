@@ -11,5 +11,10 @@ class Coupon(models.Model):
     )
     active = models.BooleanField()
 
+    class Meta:
+        ordering = ('code',)
+        verbose_name = 'Промокод'
+        verbose_name_plural = 'Промокоды'
+
     def __str__(self):
         return self.code

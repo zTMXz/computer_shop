@@ -28,7 +28,7 @@
 
                     <div class="row" style="margin-top: 10px">
                         <div class="col-sm-3">
-                            <label for="id_first_name">First Name</label>
+                            <label for="id_first_name">{% trans 'First Name' %}</label>
                         </div>
                         <div class="col-sm-9" id="FirstName">
                             <input style="width: 250px" class="form-control" type="text" name="first_name"
@@ -39,7 +39,7 @@
 
                     <div class="row" style="margin-top: 10px">
                         <div class="col-sm-3">
-                            <label for="id_last_name">Last Name</label>
+                            <label for="id_last_name">{% trans 'Last Name' %}</label>
                         </div>
                         <div class="col-sm-9" id="LastName">
                             <input style="width: 250px" class="form-control" type="text" name="last_name"
@@ -65,15 +65,15 @@
         </div>
 
         <div>
-            <h2 style="margin-top: 40px">Order History</h2>
+            <h2 style="margin-top: 40px">{% trans 'Order History' %}</h2>
 
             <table class="table" id="table" style="width: 90%; margin: auto">
                 <thead>
                 <tr>
-                    <th class="col-md-6">Product</th>
-                    <th class="col-md-2">Price per 1</th>
-                    <th class="col-md-2">Quantity</th>
-                    <th class="col-md-2">Date</th>
+                    <th class="col-md-6">{% trans 'Product' %}</th>
+                    <th class="col-md-2">{% trans 'Price per 1' %}</th>
+                    <th class="col-md-2">{% trans 'Quantity' %}</th>
+                    <th class="col-md-2">{% trans 'Date' %}</th>
                 </tr>
                 </thead>
 
@@ -102,7 +102,7 @@
                 {% else %}
                     <tr>
                         <td class="col-md-12 text-center" colspan="4">
-                            NO items to display
+                            {% trans 'NO items to display' %}
                         </td>
                     </tr>
                 {% endif %}
@@ -112,17 +112,17 @@
             <div class="pagination" style="display:flex; justify-content: center; margin-bottom: 40px">
                 <span class="step-links">
                     {% if order_detail.has_previous %}
-                        <a href="?page=1">&laquo; first</a>
-                        <a href="?page={{ order_detail.previous_page_number }}">previous</a>
+                        <a href="?page=1">&laquo; {% trans 'first' %}</a>
+                        <a href="?page={{ order_detail.previous_page_number }}">{% trans 'previous' %}</a>
                     {% endif %}
 
                     <span class="current">
-                        Page {{ order_detail.number }} of {{ order_detail.paginator.num_pages }}.
+                        {% trans 'Page' %} {{ order_detail.number }} {% trans 'of' %} {{ order_detail.paginator.num_pages }}.
                     </span>
 
                     {% if order_detail.has_next %}
-                        <a href="?page={{ order_detail.next_page_number }}">next</a>
-                        <a href="?page={{ order_detail.paginator.num_pages }}">last &raquo;</a>
+                        <a href="?page={{ order_detail.next_page_number }}">{% trans 'next' %}</a>
+                        <a href="?page={{ order_detail.paginator.num_pages }}">{% trans 'last' %} &raquo;</a>
                     {% endif %}
                 </span>
             </div>
