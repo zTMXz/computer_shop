@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 00:01+0300\n"
+"POT-Creation-Date: 2023-05-16 12:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,10 +149,12 @@ msgstr "Изготовитель"
 
 #: .\shop\templates\shop\product\detail.html:28
 #: .\shop\templates\shop\product\detail.html:83
+#: .\shop\templates\shop\product\list.html:51
 msgid "Memory Size"
 msgstr "Размер памяти"
 
 #: .\shop\templates\shop\product\detail.html:39
+#: .\shop\templates\shop\product\list.html:36
 msgid "Colors"
 msgstr "Цвета"
 
@@ -212,11 +214,11 @@ msgstr "Фильтр"
 msgid "All"
 msgstr "Все"
 
-#: .\shop\templates\shop\product\list.html:59
+#: .\shop\templates\shop\product\list.html:90
 msgid "temporarily unavailable.."
 msgstr "Временно недоступен"
 
-#: .\shop\templates\shop\product\list.html:67
+#: .\shop\templates\shop\product\list.html:98
 msgid "Add to Cart"
 msgstr "В корзину"
 
@@ -256,7 +258,7 @@ msgstr "Выйти"
 msgid "Admin Panel"
 msgstr "Админ Панель"
 
-#: .\templates\home.html:36
+#: .\templates\home.html:49
 msgid "Promotions and Offers"
 msgstr "Акции и Предложения"
 
@@ -414,6 +416,11 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Memory Size"
+#~ msgid "Memory"
+#~ msgstr "Размер памяти"
 
 #, fuzzy
 #~| msgid "First Name"

@@ -23,11 +23,10 @@ aside {
     background-color: rgb(29, 148, 68, 0.35);
     border-radius: 15px;
     height: calc(100% - 100px);
-    min-height: 300px;
+    min-height: 470px;
     width: 290px;
     color: #525252
 }
-
 
 
 .catalog {
@@ -42,8 +41,42 @@ aside {
     margin-bottom: 3px;
 }
 
-.filter-link {
+.filter-color {
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
 
+.filter-memory {
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 6px;
+    margin-bottom: 5px;
+}
+
+.filter-memory a {
+    text-decoration: none;
+    width: 60px;
+    display: block;
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #a1cfa1;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2px;
+    text-align: center;
+}
+
+aside a:hover {
+  color: #506e44;
+}
+
+.btn.btn-color {
+    width: 30px;
+    height: 25px;
+}
+
+.filter-link {
     text-decoration: none;
     color: #212529;
     font-size: 22px;
@@ -166,35 +199,25 @@ aside {
     box-shadow: 0 0 5px #1d9444, 0 0 15px #1d9444 inset;
 }
 
+.page-navigation {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
 
-/*filter*/
+.page-item .page-link {
+    color: #076f96;
+}
 
-/*.myBtnContainer.btn-group{*/
-/*    border: 1px solid;*/
-/*    border-radius: 5px;*/
-/*    background-color: #e3dcec;*/
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #1d9444;
+    border-color: #1d9444;
+}
 
-/*    margin: 100px auto 0 auto;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    width: 70%;*/
-/*    flex-wrap: wrap;*/
-/*}*/
-
-
-/*.filterDiv {*/
-/*    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06);*/
-/*    transition: all .3s;*/
-/*    float:left;*/
-/*    display: none; !* Hidden by default *!*/
-/*}*/
-
-/*!* The "show" class is added to the filtered elements *!*/
-/*.show {*/
-/*    display: block;*/
-/*}*/
-
-/*.myBtnContainer.btn-group .btn.active {*/
-/*    background-color: #4E4C97;*/
-/*    color: white;*/
-/*}*/
+input:active, input:focus,
+a:active, a:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 0 rgba(78, 76, 151, 1) !important;
+}
